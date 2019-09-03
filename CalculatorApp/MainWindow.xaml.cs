@@ -23,6 +23,7 @@ namespace CalculatorApp
         public MainWindow()
         {
             InitializeComponent();
+
         }
     }
 }
