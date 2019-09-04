@@ -38,7 +38,7 @@
             Grid.Row="1"
             FontSize="30"/>
 
-        <Button x:Name="modButton" Content="+/1"
+        <Button x:Name="negativeButton" Content="+/-"
             Margin="5"
             Grid.Row="1"
             Grid.Column="1"
@@ -62,7 +62,8 @@
             Margin="5"
             Grid.Row="2"
             Grid.Column="0"
-            FontSize="30"/>
+            FontSize="30"
+            Click="SevenButton_Click"/>
 
         <Button x:Name="eightButton" Content="8"
             Margin="5"
