@@ -23,7 +23,7 @@ namespace CalculatorApp
         #region Variables
         
         double lastNumber, result;
-        SelectedOperator selectedOperator;
+        SelectedOperator selectedOperator = SelectedOperator.None;
 
         #endregion
 
@@ -44,6 +44,8 @@ namespace CalculatorApp
             double newNumber;
             if (double.TryParse(resultLabel.Content.ToString(), out newNumber))
             {
+                ;
+
                 switch (selectedOperator)
                 {
                     case SelectedOperator.Addition:
@@ -70,14 +72,20 @@ namespace CalculatorApp
                         break;
                 }
                 resultLabel.Content = result.ToString();
+                lastNumber = result;
+                lastLabel.Content = "";
+                lastLabel.Content = lastNumber.ToString();
             }
         }
 
         private void PercentButton_Click(object sender, RoutedEventArgs e)
         {
-            if (double.TryParse(resultLabel.Content.ToString(), out lastNumber))
+            double tmp;
+            if (double.TryParse(resultLabel.Content.ToString(), out tmp))
             {
-                lastNumber /= 100;
+                tmp /= 100;
+                if (lastNumber != 0)
+                    tmp *= lastNumber;
                 resultLabel.Content = lastNumber.ToString();
             }
         }
@@ -94,13 +102,25 @@ namespace CalculatorApp
         private void AcButton_Click(object sender, RoutedEventArgs e)
         {
             resultLabel.Content = "0";
+            result = 0;
+            lastNumber = 0;
+            lastLabel.Content = "";
+            selectedOperator = SelectedOperator.None;
         }
 
         private void OperationButton_Click(object sender, RoutedEventArgs e)
         {
+           
+            
             if (double.TryParse(resultLabel.Content.ToString(), out lastNumber))
             {
+                if (lastNumber != 0)
+                {
+                    lastLabel.Content = "";
+                    lastLabel.Content = lastNumber.ToString();
+                }
                 resultLabel.Content = "0";
+
             }
 
             if (sender == plusButton)
@@ -164,6 +184,11 @@ namespace CalculatorApp
         }
         public static double Divide(double a, double b)
         {
+            if (b == 0)
+            {
+                MessageBox.Show("You divided by zero and broke the Application...","Unsuported Operation",MessageBoxButton.OK,MessageBoxImage.Error);
+                return 0;
+            }
             return a / b;
         }
     }
@@ -176,7 +201,8 @@ namespace CalculatorApp
         Addition,
         Subtraction, 
         Multiplication,
-        Division
+        Division,
+        None
     }
     #endregion
 }
