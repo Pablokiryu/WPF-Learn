@@ -6,7 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+<<<<<<< HEAD
 using System.Windows.Controls;
+=======
+
+>>>>>>> master
 
 namespace Contacts_App
 {
@@ -15,11 +19,17 @@ namespace Contacts_App
     /// </summary>
     public partial class MainWindow : Window
     {
+<<<<<<< HEAD
         List<Contact> contacts;
         public MainWindow()
         {
             InitializeComponent();
             contacts = new List<Contact>();
+=======
+        public MainWindow()
+        {
+            InitializeComponent();
+>>>>>>> master
             ReadDatabase();
         }
 
@@ -32,6 +42,7 @@ namespace Contacts_App
 
         void ReadDatabase()
         {
+<<<<<<< HEAD
            
             using(SQLiteConnection connection = new SQLiteConnection(App.databasePath))
             {
@@ -72,3 +83,15 @@ namespace Contacts_App
         }
     }
 }
+=======
+            using(SQLiteConnection connection = new SQLiteConnection(App.databasePath))
+            {
+                connection.CreateTable<Contact>();
+                var contacts = connection.Table<Contact>().ToList();
+
+            }
+
+        }
+    }
+}
+>>>>>>> master
